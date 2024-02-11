@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  web:
+    image: custom-vo-production-estimating:latest
+    container_name: custom_vo_production_estimating
+    build:
+      context: .
+      args:
+        CONTAINER_REGISTRY: ${CONTAINER_REGISTRY}
+        GITHUB_TOKEN: ${GITHUB_TOKEN}
+        PIP_ACCESS_TOKEN: ${PIP_ACCESS_TOKEN}
+    environment:
+      - PIP_ACCESS_TOKEN=${PIP_ACCESS_TOKEN}
+    # this helps with https://github.com/docker/compose/issues/3106
+    # also make sure to run docker compose with -f flag
+    volumes:
+      - C:/Github/VO-production-estimating/:/vo-production-estimating
+      - ../nvim-config:/root/.config/nvim
+
